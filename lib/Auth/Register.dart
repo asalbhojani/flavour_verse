@@ -1,12 +1,10 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 import '../Bottom_Navigation.dart';
@@ -41,7 +39,7 @@ class _RegisterState extends State<Register> {
   }
   void InsertUser ()async{
     // {String? imgURL}
-    String userId = Uuid().v1();
+    String userId = const Uuid().v1();
 
     Map<String , dynamic> userDetails ={
       "User-Id":userId,
@@ -55,14 +53,14 @@ class _RegisterState extends State<Register> {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email.text.toString(), password: pass.text.toString());
       await FirebaseFirestore.instance.collection("userData").doc(userId).set(userDetails);
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> const Login()));
       // SharedPreferences userLoginDetails = await SharedPreferences.getInstance();
       // userLoginDetails.setBool("UserLoggedIn", true);
     }on FirebaseAuthException catch(ex){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${ex.code.toString()}')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(ex.code.toString())));
     }
   }
-  var _formkey =GlobalKey<FormState>();
+  final _formkey =GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -109,7 +107,7 @@ class _RegisterState extends State<Register> {
                   Container(
                     width: double.infinity,
                     height: 250,
-                    color: Color(0xf0000523),
+                    color: Theme.of(context).primaryColor,
 
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,17 +116,17 @@ class _RegisterState extends State<Register> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:[
                             Container(
-                              padding: EdgeInsets.all(7.0),
-                              margin: EdgeInsets.only(left: 40,top: 50),
+                              padding: const EdgeInsets.all(7.0),
+                              margin: const EdgeInsets.only(left: 40,top: 50),
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(40)
                               ),
                               child: GestureDetector(
                                 onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> bottomNavigation(),));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const BottomNavigation(),));
                                 },
-                                child: Icon(
+                                child: const Icon(
                                   Icons.arrow_back_ios_rounded, // Arrow icon
                                   size: 18, // Icon size
                                   color: Color(0xff282828), // Icon color (match the container background)
@@ -137,20 +135,20 @@ class _RegisterState extends State<Register> {
                             ),
 
                             Container(
-                              margin: EdgeInsets.only(left: 100,top: 15),
+                              margin: const EdgeInsets.only(left: 100,top: 15),
                               child: Text("Welcome Back", style: GoogleFonts.poppins(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xffffffff),
+                                color: Theme.of(context).iconTheme.color,
                               ),),
                             ),
 
                             Container(
-                              margin: EdgeInsets.only(left: 124,),
+                              margin: const EdgeInsets.only(left: 124,),
                               child: Text("SignIn to your account", style: GoogleFonts.poppins(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
-                                color: Color(0xffffffff),
+                                color: Theme.of(context).iconTheme.color,
                               ),),
                             ),
 
@@ -160,10 +158,10 @@ class _RegisterState extends State<Register> {
 
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.symmetric(vertical: 200),
+                    margin: const EdgeInsets.symmetric(vertical: 200),
                     decoration: BoxDecoration(
-                        color: Color(0xf0ffffff),
-                        borderRadius: BorderRadius.only(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(40),
                             topLeft: Radius.circular(40)
                         )
@@ -172,11 +170,11 @@ class _RegisterState extends State<Register> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 24,top: 40),
+                          margin: const EdgeInsets.only(left: 24,top: 40),
                           child: Text("Register ", style: GoogleFonts.poppins(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                            color: Color(0xff171717),
+                            color:Theme.of(context).colorScheme.secondary,
                           ),),
                         ),
 
@@ -185,7 +183,7 @@ class _RegisterState extends State<Register> {
                           child: Column(
                             children: [
 
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
 
                               // GestureDetector(
                               //   onTap: () async {
@@ -207,10 +205,10 @@ class _RegisterState extends State<Register> {
                               //   ),
                               // ),
 
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
 
                               Container(
-                                  margin: EdgeInsets.symmetric(horizontal:20),
+                                  margin: const EdgeInsets.symmetric(horizontal:20),
                                   child:TextFormField(
                                       controller: name,
                                       validator: (value){
@@ -224,22 +222,23 @@ class _RegisterState extends State<Register> {
                                         return null;
                                       },
                                       decoration: InputDecoration(
-                                        label: Text("Enter your name"),
+                                        label: const Text("Enter your name"),
+                                        filled: true,
                                         border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(40),
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                               color: Colors.lime
                                           ),
                                         ),
-                                        prefixIcon: Icon(Icons.person),
+                                        prefixIcon: const Icon(Icons.person),
                                       )
                                   )
                               ),
 
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
 
                               Container(
-                                margin: EdgeInsets.symmetric(horizontal: 20),
+                                margin: const EdgeInsets.symmetric(horizontal: 20),
                                 child: TextFormField(
                                   controller: age,
                                   keyboardType: TextInputType.number, // Set keyboard type to number
@@ -257,19 +256,20 @@ class _RegisterState extends State<Register> {
                                   },
                                   decoration: InputDecoration(
                                     labelText: "Enter your Age",
+                                    filled: true,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(color: Colors.lime),
+                                      borderSide: const BorderSide(color: Colors.lime),
                                     ),
-                                    prefixIcon: Icon(Icons.person),
+                                    prefixIcon: const Icon(Icons.person),
                                   ),
                                 ),
                               ),
 
 
-                              SizedBox(height:20,),
+                              const SizedBox(height:20,),
                               Container(
-                                  margin: EdgeInsets.symmetric(horizontal:20),
+                                  margin: const EdgeInsets.symmetric(horizontal:20),
                                   child:TextFormField(
                                       controller: email,
                                       validator: (value){
@@ -279,22 +279,23 @@ class _RegisterState extends State<Register> {
                                         return null;
                                       },
                                       decoration: InputDecoration(
-                                        label: Text("Enter your email"),
+                                        label: const Text("Enter your email"),
+                                        filled: true,
                                         border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(40),
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                               color: Colors.lime
                                           ),
                                         ),
-                                        prefixIcon: Icon(Icons.person),
+                                        prefixIcon: const Icon(Icons.person),
                                       )
                                   )
                               ),
 
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
 
                               Container(
-                                  margin: EdgeInsets.symmetric(horizontal:20),
+                                  margin: const EdgeInsets.symmetric(horizontal:20),
                                   child:TextFormField(
                                       controller: pass,
                                       validator: (value){
@@ -306,57 +307,54 @@ class _RegisterState extends State<Register> {
                                       obscureText: true,
                                       obscuringCharacter: "*",
                                       decoration: InputDecoration(
-                                        label: Text("Enter your password"),
+                                        label: const Text("Enter your password"),
+                                        filled: true,
                                         border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(40),
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                               color: Colors.lime
                                           ),
                                         ),
-                                        prefixIcon: Icon(Icons.key),
+                                        prefixIcon: const Icon(Icons.key),
                                       )
                                   )
                               ),
 
-                              SizedBox(height:20,),
+                              const SizedBox(height:20,),
 
-                              ElevatedButton(onPressed: (){
+                              GestureDetector(
+                                onTap: (){
+                                  if (_formkey.currentState!.validate()) {
 
-                                if (_formkey.currentState!.validate()) {
+                                    InsertUserwithImg();
 
-                                  InsertUserwithImg();
-
-                                }
-                              },
-                                style: ElevatedButton.styleFrom(
-                                  side: BorderSide(width: 0, color: Colors.white), backgroundColor: Colors.white,
-                                  elevation: 0,
-                                ),
+                                  }
+                                },
                                 child: Container(
-                                  margin: EdgeInsets.only(top: 20,left: 30,right: 30),
+                                  margin: const EdgeInsets.only(top: 20,left: 30,right: 30),
                                   width: 350,
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    color: Color(0xf0000523),
+                                    color: Theme.of(context).primaryColor,
                                     // border: Border.all(color: Color(0xffffffff),width: 3),
                                     borderRadius: BorderRadius.circular(40),
 
                                   ),
                                   child:Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 4,vertical:1 ),
+                                    padding: const EdgeInsets.symmetric(horizontal: 4,vertical:1 ),
                                     child: Row(
                                       children: [
-                                        SizedBox(width: 120,),
+                                        const SizedBox(width: 120,),
                                         Text("Register", style: GoogleFonts.poppins(
                                             fontWeight: FontWeight.w700,
-                                            color:  Color(0xffffffff)
+                                            color:  const Color(0xffffffff)
                                         ),)
                                       ],
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 30,),
+                              const SizedBox(height: 30,),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -368,7 +366,7 @@ class _RegisterState extends State<Register> {
 
                                   GestureDetector(
                                     onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login(),));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const Login(),));
                                     },
                                     child:Text("SignIn",style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w700),),
                                   ),

@@ -16,7 +16,7 @@ class _IntroScreen1State extends State<IntroScreen1> {
       // backgroundColor: Color(0xff7838c0),
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment(0.3,0.3),
               end: Alignment(0.5,0.7),
@@ -34,7 +34,7 @@ class _IntroScreen1State extends State<IntroScreen1> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             
-            Container(
+            SizedBox(
               height: 400,
               width: 500,
               child: Image.asset("assets/images/intro11.png"),
@@ -42,17 +42,17 @@ class _IntroScreen1State extends State<IntroScreen1> {
             
             Container(
               width: 200,
-              margin: EdgeInsets.only(left: 30,top: 0),
+              margin: const EdgeInsets.only(left: 30,top: 0),
               child: Text("Cook Like",style: GoogleFonts.poppins(
-                  color: Color(0xffffffff),
+                  color: const Color(0xffffffff),
                   fontSize: 40,
                   fontWeight: FontWeight.w600
               ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 30,top: 0),
+              margin: const EdgeInsets.only(left: 30,top: 0),
               child: Text("A Chef",style: GoogleFonts.poppins(
-                  color: Color(0xffffffff),
+                  color: const Color(0xffffffff),
                   fontSize: 43,
                   fontWeight: FontWeight.w600
               ),),
@@ -60,9 +60,9 @@ class _IntroScreen1State extends State<IntroScreen1> {
 
             Container(
               width: 250,
-              margin: EdgeInsets.only(left: 30),
+              margin: const EdgeInsets.only(left: 30),
               child: Text("Cook Professional Dishes right in your kitchen",style: GoogleFonts.poppins(
-                  color: Color(0xffffffff),
+                  color: const Color(0xffffffff),
                   fontSize: 16,
                   fontWeight: FontWeight.w400
               ),),

@@ -10,7 +10,7 @@ class IntroScreen2 extends StatefulWidget {
 class _IntroScreen2State extends State<IntroScreen2> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.deepPurple,
       body: Column(
         children: [

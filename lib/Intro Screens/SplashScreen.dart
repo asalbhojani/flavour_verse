@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           // Full Screen Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage("https://images.pexels.com/photos/1109197/pexels-photo-1109197.jpeg?auto=compress&cs=tinysrgb&w=600"), // Provide your image path here
                 fit: BoxFit.cover,
@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
             color: Colors.black.withOpacity(0.75), // Adjust opacity level here
           ),
           // Add additional widgets or content here
-          Center(
+          const Center(
             child: Text(
               'Taste Trov',
               style: TextStyle(

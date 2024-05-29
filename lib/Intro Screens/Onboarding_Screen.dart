@@ -16,7 +16,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
 
-  PageController _controller= PageController();
+  final PageController _controller= PageController();
   bool onLastPage=false;
 
   @override
@@ -31,7 +31,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onLastPage= (index==2);
               });
             },
-            children: [
+            children: const [
               IntroScreen1(),
               IntroScreen2(),
               IntroScreen3()
@@ -39,7 +39,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
 
           Container(
-              alignment: Alignment(0,0.85),
+              alignment: const Alignment(0,0.85),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -52,7 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                     child: Text("Skip",style: GoogleFonts.poppins(
                       fontSize: 14,
-                      color: Color(0xffffffff),
+                      color: const Color(0xffffffff),
                       fontWeight: FontWeight.w400,
                     ),),
                   ),
@@ -63,21 +63,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   onLastPage?
                   GestureDetector(
                     onTap:(){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Explore()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const Explore()));
                     } ,
                     child: Text("Done",style: GoogleFonts.poppins(
                       fontSize: 14,
-                      color: Color(0xffffffff),
+                      color: const Color(0xffffffff),
                       fontWeight: FontWeight.w400,
                     ),),
                   ):
                   GestureDetector(
                     onTap:(){
-                      _controller.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+                      _controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
                     } ,
                     child: Text("Next",style: GoogleFonts.poppins(
                       fontSize: 14,
-                      color: Color(0xffffffff),
+                      color: const Color(0xffffffff),
                       fontWeight: FontWeight.w400,
                     ),),
                   ),

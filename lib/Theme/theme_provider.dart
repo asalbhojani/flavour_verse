@@ -25,12 +25,12 @@ class MyThemes {
     brightness: Brightness.dark,
     scaffoldBackgroundColor:  Colors.black,
     colorScheme: ColorScheme.dark(
-      background: Colors.grey.shade900,
-      primary: Colors.grey.shade800,
-      secondary: Colors.white,
+      background: Colors.grey.shade800,
+      primary: Colors.grey.shade700 ,
+      secondary: Colors.grey.shade500,
     ),
-    primaryColor: Color(0xff1f9fb6),
-    iconTheme: IconThemeData(color: Colors.white, opacity: 0.8),
+    primaryColor: const Color(0xff1f9fb6),
+    iconTheme: const IconThemeData(color: Colors.white, opacity: 0.8),
   );
 
   static final lightTheme = ThemeData(
@@ -39,9 +39,9 @@ class MyThemes {
     colorScheme: ColorScheme.light(
       background: Colors.grey.shade600,
       primary: Colors.grey.shade500,
-      secondary: Colors.black,
+      secondary: Colors.grey.shade300,
     ),
-    primaryColor: Color(0xff1f9fb6),
-    iconTheme: IconThemeData(color: Colors.black, opacity: 0.8),
+    primaryColor: const Color(0xff1f9fb6),
+    iconTheme: const IconThemeData(color: Colors.black, opacity: 0.8),
   );
 }

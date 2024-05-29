@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -12,7 +10,7 @@ import 'Services.dart';
 class DescriptionScreen extends StatefulWidget {
   var idMeal;
 
-  DescriptionScreen({required this.idMeal});
+  DescriptionScreen({super.key, required this.idMeal});
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState(id_Meal: idMeal);
@@ -31,9 +29,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
           future:  MyServices.descfetch(id_Meal),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Icon(Icons.error));
+              return const Center(child: Icon(Icons.error));
             } else {
               Map map = jsonDecode(snapshot.data.toString());
               List mydata = map['meals'];
@@ -51,7 +49,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage('$img'),
+                            image: NetworkImage(img),
                           ),
                         ),
                       ),
@@ -65,7 +63,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const bottomNavigation()),
+                              MaterialPageRoute(builder: (context) => const BottomNavigation()),
                             );
                           },
                           child: const Icon(
@@ -83,11 +81,20 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                       Container(
                         width: double.infinity,
                         // height:400,
-                        height: MediaQuery.of(context).size.height -255,
-                        margin: EdgeInsets.only(top: 250,left: 20,right: 20),
-                        padding: EdgeInsets.only(top: 30,left: 20,right: 15),
+                        height: MediaQuery.of(context).size.height -299,
+                        margin: const EdgeInsets.only(top: 250,left: 20,right: 20),
+                        padding: const EdgeInsets.only(top: 30,left: 20,right: 15),
                         decoration: BoxDecoration(
-                            color: Color(0xffffffff),
+
+                            color: Theme.of(context).scaffoldBackgroundColor,
+            boxShadow: [
+            BoxShadow(
+            color: Theme.of(context).colorScheme.primary,
+            spreadRadius: 1,
+            blurRadius: 2,
+            offset: const Offset(0.4, 0.1),
+            )
+            ],
                           borderRadius: BorderRadius.circular(20)
                         ),
 
@@ -99,20 +106,20 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(left: 20,top: 0),
-                                  child: Text('$name',style: GoogleFonts.poppins(
-                                      color: Color(0xff000000),
+                                  margin: const EdgeInsets.only(left: 20,top: 0),
+                                  child: Text(name,style: GoogleFonts.poppins(
+                                      color: Theme.of(context).colorScheme.secondary,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600
                                   ),),
                                 ),
-                                SizedBox(height: 20),
-                                Text('$instruction',style: GoogleFonts.poppins(
-                                    color: Color(0xff000000),
+                                const SizedBox(height: 20),
+                                Text(instruction,style: GoogleFonts.poppins(
+                                    color: Theme.of(context).colorScheme.primary,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500
                                 ),),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
 
 
 
@@ -129,18 +136,18 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           margin: EdgeInsets.only(top: 230,left: MediaQuery.of(context).size.width -105,),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Color(0xffcc3030),
+                              color: const Color(0xffcc3030),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color(0xffb0b0b0,),
+                                  color: Theme.of(context).colorScheme.primary,
                                   spreadRadius: 1,
                                   blurRadius: 6,
-                                  offset: Offset(1, 5),
+                                  offset: const Offset(0.4, 2),
                                 )
                               ]
                             // border: Border.all(color: Color(0xffa19e9e))
                           ),
-                          child: Icon(CupertinoIcons.heart,color: Color(0xffffffff))
+                          child: const Icon(CupertinoIcons.heart,color: Color(0xffffffff))
                       ),
 
                     ],

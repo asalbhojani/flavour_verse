@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavour_verse/Auth/profileEdit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,13 +46,13 @@ class _userProfileState extends State<userProfile> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                   if (snapshot.hasData) {
                     var dataLength = snapshot.data!.docs.length;
 
                     return dataLength == 0
-                        ? Center(
+                        ? const Center(
                       child: Text("Nothing to show"),
                     )
                         : ListView.builder(
@@ -86,14 +87,14 @@ class _userProfileState extends State<userProfile> {
                                       children: [
 
                                         Container(
-                                          padding: EdgeInsets.all(7.0),
-                                          margin: EdgeInsets.only(left: 40, top: 50),
+                                          padding: const EdgeInsets.all(7.0),
+                                          margin: const EdgeInsets.only(left: 40, top: 50),
                                           decoration: BoxDecoration(
                                               color: Theme.of(context).scaffoldBackgroundColor,
                                               borderRadius: BorderRadius.circular(40)),
                                           child: GestureDetector(
                                               onTap: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => bottomNavigation(),));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomNavigation(),));
                                               },
 
                                               child: Row(
@@ -145,10 +146,10 @@ class _userProfileState extends State<userProfile> {
 
                               Container(
                                 width: double.infinity,
-                                margin: EdgeInsets.symmetric(vertical: 200),
+                                margin: const EdgeInsets.symmetric(vertical: 200),
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).scaffoldBackgroundColor,
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                         topRight: Radius.circular(40),
                                         topLeft: Radius.circular(40))),
                                 child: Column(
@@ -156,9 +157,9 @@ class _userProfileState extends State<userProfile> {
                                   CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      margin:EdgeInsets.only(top:120,),
+                                      margin:const EdgeInsets.only(top:120,),
                                       child: Center(
-                                        child: Text("$userName",style: GoogleFonts.poppins(
+                                        child: Text(userName,style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 20,
                                           // color: Theme.of(context).primaryColor,
@@ -167,20 +168,20 @@ class _userProfileState extends State<userProfile> {
                                     ),
 
                                     Center(
-                                      child: Text("$userEmail",style: TextStyle(
+                                      child: Text(userEmail,style: const TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 16,
                                         color: Color(0xf08f8f8f),
                                       ),),
                                     ),
 
-                                    SizedBox(height: 20,),
+                                    const SizedBox(height: 20,),
 
                                     Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 50),
+                                      margin: const EdgeInsets.symmetric(horizontal: 50),
                                       width: double.infinity,
                                       height: 60,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         // color: Colors.orange
                                       ),
                                       child: Row(
@@ -189,7 +190,7 @@ class _userProfileState extends State<userProfile> {
 
                                           GestureDetector(
                                               onTap: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => bottomNavigation(),));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => profileEdit(UId: userId, UName: userName, UAge: userAge, UEmail: userEmail, UPassword: userPassword),));
                                               },
 
                                               child:
@@ -210,24 +211,24 @@ class _userProfileState extends State<userProfile> {
                                             //   color: Color(0xffff9e20), // Icon color (match the container background)
                                             // ),
                                           ),
-                                          SizedBox(width: 25,),
+                                          const SizedBox(width: 25,),
                                           Text("Personal Information",style: GoogleFonts.poppins(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 17,
-                                            color: Color(0xf0343434),
+                                            color: const Color(0xf0343434),
                                           ),),
 
                                         ],),
                                     ),
 
 
-                                    SizedBox(height: 10,),
+                                    const SizedBox(height: 10,),
 
                                     Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 50),
+                                      margin: const EdgeInsets.symmetric(horizontal: 50),
                                       width: double.infinity,
                                       height: 60,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         // color: Colors.orange
                                       ),
                                       child: Row(
@@ -236,7 +237,7 @@ class _userProfileState extends State<userProfile> {
 
                                           GestureDetector(
                                               onTap: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => bottomNavigation(),));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomNavigation(),));
                                               },
 
                                               child:
@@ -257,27 +258,27 @@ class _userProfileState extends State<userProfile> {
                                             //   color: Color(0xffff9e20), // Icon color (match the container background)
                                             // ),
                                           ),
-                                          SizedBox(width: 25,),
+                                          const SizedBox(width: 25,),
                                           Text("Night Mode",style: GoogleFonts.poppins(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 17,
-                                            color: Color(0xf0343434),
+                                            color: const Color(0xf0343434),
                                           ),),
                                           // SizedBox(width: 75,),
-                                          ChangeThemeButtonWidget(),
+                                          const ChangeThemeButtonWidget(),
 
                                         ],),
                                     ),
 
 
 
-                                    SizedBox(height: 10,),
+                                    const SizedBox(height: 10,),
 
                                     Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 45),
+                                      margin: const EdgeInsets.symmetric(horizontal: 45),
                                       width: double.infinity,
                                       height: 60,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         // color: Colors.orange
                                       ),
                                       child: Row(
@@ -289,7 +290,7 @@ class _userProfileState extends State<userProfile> {
                                               FirebaseAuth.instance.signOut();
                                               SharedPreferences userLoginDetails= await SharedPreferences.getInstance();
                                               userLoginDetails.clear();
-                                              Navigator.push(context,MaterialPageRoute(builder: (context) => Login()));
+                                              Navigator.push(context,MaterialPageRoute(builder: (context) => const Login()));
                                             },
 
                                             child:
@@ -306,11 +307,11 @@ class _userProfileState extends State<userProfile> {
                                                     package: CupertinoIcons.square_arrow_right.fontPackage,
                                                   ),
                                                 ),
-                                                SizedBox(width: 25,),
+                                                const SizedBox(width: 25,),
                                                 Text("Logout",style: GoogleFonts.poppins(
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: 17,
-                                                  color: Color(0xf0343434),
+                                                  color: const Color(0xf0343434),
                                                 ),),
                                               ],),
 
@@ -347,13 +348,13 @@ class _userProfileState extends State<userProfile> {
                                   ],),
                               ),
                               Container(
-                                margin: EdgeInsets.only(left: 90,top:100),
-                                padding:EdgeInsets.symmetric(horizontal:10,vertical:10),
+                                margin: const EdgeInsets.only(left: 90,top:100),
+                                padding:const EdgeInsets.symmetric(horizontal:10,vertical:10),
                                 decoration: BoxDecoration(
                                   color:Theme.of(context).scaffoldBackgroundColor,
                                   borderRadius: BorderRadius.circular(120),
                                 ),
-                                child: CircleAvatar(
+                                child: const CircleAvatar(
                                   radius: 100,
                                   backgroundColor: Color(0xf0ababab),
                                   // backgroundImage: NetworkImage(userImage),

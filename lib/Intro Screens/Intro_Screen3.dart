@@ -13,7 +13,7 @@ class _IntroScreen3State extends State<IntroScreen3> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.pinkAccent[200],
-      body: Column(
+      body: const Column(
         children: [
 
         ],),

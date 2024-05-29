@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
 import 'Bottom_Navigation.dart';
+import 'DescriptionScreen.dart';
 
 class Search extends StatefulWidget {
-  const Search({Key? key}) : super(key: key);
+  const Search({super.key});
 
   @override
   State<Search> createState() => _SearchState();
@@ -31,9 +32,9 @@ class _SearchState extends State<Search> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         flexibleSpace: Padding(
-          padding: EdgeInsets.only(left: 10, right: 10, top: 5),
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
           child: TextField(
             controller: searchController,
             onChanged: (value) {
@@ -48,19 +49,19 @@ class _SearchState extends State<Search> {
             style: GoogleFonts.poppins(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: Colors.black,
+              color: Theme.of(context).iconTheme.color,
             ),
             decoration: InputDecoration(
-              hintText: 'Search',
-              hintStyle: TextStyle(color: Colors.black),
-              contentPadding: EdgeInsets.only(left: 20, top: 20),
+              hintText: 'Search Here',
+              hintStyle: TextStyle(color: Theme.of(context).iconTheme.color),
+              contentPadding: const EdgeInsets.only(left: 60, top: 20),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
-                borderSide: BorderSide(color: Colors.grey),
+                borderSide: const BorderSide(color: Colors.grey),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
-                borderSide: BorderSide(color: Colors.grey),
+                borderSide: const BorderSide(color: Colors.grey),
               ),
               suffixIcon: IconButton(
                 onPressed: () {
@@ -69,11 +70,11 @@ class _SearchState extends State<Search> {
                 },
                 icon: Icon(
                   Icons.search,
-                  color: Colors.black,
+                  color: Theme.of(context).iconTheme.color,
                 ),
               ),
             ),
-            cursorColor: Colors.black,
+            cursorColor: Theme.of(context).iconTheme.color,
           ),
         ),
         centerTitle: true,
@@ -81,22 +82,26 @@ class _SearchState extends State<Search> {
         leading: Builder(builder: (context) {
           return GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => bottomNavigation()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomNavigation()));
             },
-            child: Icon(
-              Icons.arrow_back_ios_rounded,
-              color: Colors.black,
+            child: Container(
+              margin: const EdgeInsets.only(left: 20 ),
+              child: Icon(
+                Icons.arrow_back_ios_rounded,
+                color: Theme.of(context).iconTheme.color,
+              ),
             ),
           );
         }),
       ),
       body: SingleChildScrollView(
         child: SafeArea(
+          top:true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.only(top: 20, bottom: 10, left: 20),
+                margin: const EdgeInsets.only(top: 20, bottom: 10, left: 20),
                 child: Text(
                   "Search Results",
                   style: GoogleFonts.poppins(
@@ -107,31 +112,39 @@ class _SearchState extends State<Search> {
               ),
               searchData.isEmpty
                   ? Container(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                alignment: Alignment.center,
-                child: Text(
-                  'No results found',
-                  style: TextStyle(fontSize: 16),
-                ),
-              )
-                  : ListView.builder(
-                shrinkWrap: true,
-                itemCount: searchData.length,
-                itemBuilder: (context, index) {
-                  var item = searchData[index];
-                  return ListTile(
-                    onTap: () {
-                      // Handle onTap
-                    },
-                    leading: CircleAvatar(
-                      radius: 24,
-                      backgroundImage: NetworkImage(item['strMealThumb']),
-                    ),
-                    title: Text(item['strMeal']),
-                    subtitle: Text(item['strCategory']),
-                  );
-                },
-              ),
+                margin: const EdgeInsets.only(top: 40),
+                    child: Center(
+                                    child: Text("Nothing To Show",style: GoogleFonts.poppins(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600
+                                    ),),
+                                  ),
+                  )
+                  : SizedBox(
+                 height: MediaQuery.of(context).size.height * 0.73 ,
+                    child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: searchData.length,
+                                    itemBuilder: (context, index) {
+                    var item = searchData[index];
+                    var idMeal=item['idMeal'];
+                    return ListTile(
+                      onTap: () {
+                        // Handle onTap
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> DescriptionScreen(idMeal: idMeal),));
+                        },
+
+                      leading: CircleAvatar(
+                        radius: 24,
+                        backgroundImage: NetworkImage(item['strMealThumb']),
+                      ),
+                      title: Text(item['strMeal']),
+                      subtitle: Text(item['strCategory']),
+                    );
+                                    },
+                                  ),
+                  ),
             ],
           ),
         ),

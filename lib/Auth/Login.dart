@@ -21,15 +21,15 @@ class _LoginState extends State<Login> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email.text.toString(), password: pass.text.toString());
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> bottomNavigation()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> const BottomNavigation()));
       SharedPreferences userLoginDetails = await SharedPreferences.getInstance();
       userLoginDetails.setString("UserLoggedIn", email.text.toString());
     }on FirebaseAuthException catch(ex){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${ex.code.toString()}')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(ex.code.toString())));
     }
   }
 
-  var _formkey =GlobalKey<FormState>();
+  final _formkey =GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -75,7 +75,7 @@ class _LoginState extends State<Login> {
                   Container(
                     width: double.infinity,
                     height: 250,
-                    color: Color(0xf0000523),
+                    color: Theme.of(context).primaryColor,
 
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,17 +84,17 @@ class _LoginState extends State<Login> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:[
                             Container(
-                              padding: EdgeInsets.all(7.0),
-                              margin: EdgeInsets.only(left: 40,top: 50),
+                              padding: const EdgeInsets.all(7.0),
+                              margin: const EdgeInsets.only(left: 40,top: 50),
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(40)
                               ),
                               child: GestureDetector(
                                 onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> bottomNavigation(),));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const BottomNavigation(),));
                                 },
-                                child: Icon(
+                                child: const Icon(
                                   Icons.arrow_back_ios_rounded, // Arrow icon
                                   size: 18, // Icon size
                                   color: Color(0xff282828), // Icon color (match the container background)
@@ -103,20 +103,20 @@ class _LoginState extends State<Login> {
                             ),
 
                             Container(
-                              margin: EdgeInsets.only(left: 100,top: 15),
+                              margin: const EdgeInsets.only(left: 100,top: 15),
                               child: Text("Welcome Back", style: GoogleFonts.poppins(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xffffffff),
+                                color: Theme.of(context).iconTheme.color,
                               ),),
                             ),
 
                             Container(
-                              margin: EdgeInsets.only(left: 124,),
+                              margin: const EdgeInsets.only(left: 124,),
                               child: Text("SignIn to your account", style: GoogleFonts.poppins(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
-                                color: Color(0xffffffff),
+                                color:Theme.of(context).iconTheme.color,
                               ),),
                             ),
 
@@ -127,10 +127,10 @@ class _LoginState extends State<Login> {
                   Container(
                     width: double.infinity,
                     height: 500,
-                    margin: EdgeInsets.symmetric(vertical: 200),
+                    margin: const EdgeInsets.symmetric(vertical: 200),
                     decoration: BoxDecoration(
-                        color: Color(0xf0ffffff),
-                        borderRadius: BorderRadius.only(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(40),
                             topLeft: Radius.circular(40)
                         )
@@ -139,11 +139,11 @@ class _LoginState extends State<Login> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 24,top: 40),
+                          margin: const EdgeInsets.only(left: 24,top: 40),
                           child: Text("Sign In ", style: GoogleFonts.poppins(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                            color: Color(0xff171717),
+                            color: Theme.of(context).colorScheme.secondary,
                           ),),
                         ),
 
@@ -152,9 +152,9 @@ class _LoginState extends State<Login> {
                           child: Column(
                             children: [
 
-                              SizedBox(height:20,),
+                              const SizedBox(height:20,),
                               Container(
-                                  margin: EdgeInsets.symmetric(horizontal:30),
+                                  margin: const EdgeInsets.symmetric(horizontal:30),
                                   child:TextFormField(
                                       controller: email,
                                       validator: (value) {
@@ -164,28 +164,28 @@ class _LoginState extends State<Login> {
                                         return null;
                                       },
                                       decoration: InputDecoration(
-                                        label: Text("Enter your email"),
+                                        label: const Text("Enter your email"),
                                         filled: true,
                                         // fillColor: Color(0xffff6d40),
                                         border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(40),
                                           borderSide: BorderSide(
-                                            color: Color(0xf001074f),
-                                            width: 2,
+                                            color: Theme.of(context).primaryColor,
+                                            // width: 2,
                                           ),
                                         ),
                                         prefixIcon: Padding(
-                                          padding: EdgeInsets.only(left: 25.0,right: 20),
-                                          child: Icon(Icons.person,color: Color(0xf001074f),),),
+                                          padding: const EdgeInsets.only(left: 25.0,right: 20),
+                                          child: Icon(Icons.person,color: Theme.of(context).primaryColor,),),
                                         // prefixIcon: Icon(Icons.person,color: Color(0xf001074f),),
                                       )
                                   )
                               ),
 
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
 
                               Container(
-                                  margin: EdgeInsets.symmetric(horizontal:30),
+                                  margin: const EdgeInsets.symmetric(horizontal:30),
                                   child:TextFormField(
                                       controller: pass,
                                       validator: (value){
@@ -197,56 +197,51 @@ class _LoginState extends State<Login> {
                                       obscureText: true,
                                       obscuringCharacter: "*",
                                       decoration: InputDecoration(
-                                        label: Text("Enter your password"),
+                                        label: const Text("Enter your password"),
                                         filled: true,
                                         // fillColor: Color(0xffff6d40),
                                         border: OutlineInputBorder(
-                                          borderSide: BorderSide(color: Color(0xffff6d40), width: 4,),
+                                          borderSide: BorderSide(color: Theme.of(context).primaryColor, ),
                                           borderRadius: BorderRadius.circular(40),
                                         ),
                                         prefixIcon: Padding(
-                                            padding: EdgeInsets.only(left: 25.0,right: 20),
-                                            child: Icon(Icons.key,color: Color(0xf001074f), // _myIcon is a 48px-wide widget.
+                                            padding: const EdgeInsets.only(left: 25.0,right: 20),
+                                            child: Icon(Icons.key,color: Theme.of(context).primaryColor, // _myIcon is a 48px-wide widget.
                                             )),
                                         // prefixIcon: Icon(Icons.key,color: Color(0xf001074f),),
                                       )
                                   )
                               ),
 
-                              SizedBox(height:20,),
+                              const SizedBox(height:20,),
 
-                              ElevatedButton(onPressed: (){
-                                if (_formkey.currentState!.validate()) {
+                              GestureDetector(
+                                onTap: (){
+                                  if (_formkey.currentState!.validate()) {
 
-                                  login_user();
+                                    login_user();
 
-                                }
-
-                              },
-                                style: ElevatedButton.styleFrom(
-                                  side: BorderSide(width: 0, color: Colors.white), backgroundColor: Colors.white,
-                                  elevation: 0,
-                                ),
-
-                                child:Container(
-                                  margin: EdgeInsets.only(top: 20,left: 30,right: 30),
+                                  }
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(top: 20,left: 30,right: 30),
                                   width: 250,
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    color: Color(0xf0000523),
+                                    color: Theme.of(context).primaryColor,
                                     // border: Border.all(color: Color(0xffffffff),width: 3),
                                     borderRadius: BorderRadius.circular(40),
 
                                   ),
                                   child:Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 4,vertical:1 ),
+                                    padding: const EdgeInsets.symmetric(horizontal: 4,vertical:1 ),
                                     child: Row(
                                       children: [
-                                        SizedBox(width: 80,),
+                                        const SizedBox(width: 80,),
                                         Text("Sign In", style: GoogleFonts.poppins(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
-                                            color:  Color(0xffffffff)
+                                            color:  const Color(0xffffffff)
                                         ),)
                                       ],
                                     ),
@@ -254,50 +249,51 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
 
-                              SizedBox(height: 30,),
-                              Text("Or Sign in with",style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w600),),
+                              // SizedBox(height: 30,),
+                              // Text("Or Sign in with",style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w600),),
+                              //
+                              // Row(
+                              //     mainAxisAlignment: MainAxisAlignment.center,
+                              //     children:[
+                              //
+                              //       Container(
+                              //         height: 50,
+                              //         width: 50,
+                              //         decoration: BoxDecoration(
+                              //           image: DecorationImage(image: NetworkImage("https://pbs.twimg.com/profile_images/1605297940242669568/q8-vPggS_400x400.jpg"),
+                              //           ),
+                              //           color: Theme.of(context).scaffoldBackgroundColor,
+                              //           boxShadow: [
+                              //             BoxShadow(
+                              //               color: Color(0xffa4a4a4),
+                              //               spreadRadius: 2,
+                              //               blurRadius: 4,
+                              //               offset: Offset(3, 3),
+                              //             )],
+                              //         ),
+                              //       ),
+                              //       SizedBox(width: 20,height: 50,),
+                              //       Container(
+                              //         height: 50,
+                              //         width: 50,
+                              //         decoration: BoxDecoration(
+                              //           image: DecorationImage(image: NetworkImage("https://www.wizcase.com/wp-content/uploads/2022/05/Facebook-Logo.png"),
+                              //           ),
+                              //           color: Theme.of(context).scaffoldBackgroundColor,
+                              //           boxShadow: [
+                              //             BoxShadow(
+                              //               color: Theme.of(context).colorScheme.background,
+                              //               spreadRadius: 2,
+                              //               blurRadius: 4,
+                              //               offset: Offset(3, 3),
+                              //             )],
+                              //
+                              //         ),
+                              //       ),
+                              //     ]
+                              // ),
 
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children:[
-
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(image: NetworkImage("https://pbs.twimg.com/profile_images/1605297940242669568/q8-vPggS_400x400.jpg"),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color(0xffa4a4a4),
-                                            spreadRadius: 2,
-                                            blurRadius: 4,
-                                            offset: Offset(3, 3),
-                                          )],
-                                      ),
-                                    ),
-                                    SizedBox(width: 20,height: 50,),
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(image: NetworkImage("https://www.wizcase.com/wp-content/uploads/2022/05/Facebook-Logo.png"),
-                                        ),
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color(0xffa4a4a4),
-                                            spreadRadius: 2,
-                                            blurRadius: 4,
-                                            offset: Offset(3, 3),
-                                          )],
-
-                                      ),
-                                    ),
-                                  ]
-                              ),
-
-                              SizedBox(height: 30,),
+                              const SizedBox(height: 30,),
 
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -310,7 +306,7 @@ class _LoginState extends State<Login> {
 
                                   GestureDetector(
                                     onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Register(),));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const Register(),));
                                     },
                                     child:Text("SignUp",style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w700),),
                                   ),

@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flavour_verse/Auth/Login.dart';
+import 'package:flavour_verse/Bottom_Navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'Bottom_Navigation.dart';
 import 'Theme/theme_provider.dart';
 import 'firebase_options.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: MyThemes.lightTheme,
         darkTheme: MyThemes.darkTheme,
-        home:bottomNavigation(),
+        home: const BottomNavigation()
       );
     },
   );
